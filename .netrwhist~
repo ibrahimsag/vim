@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='D:/idressin/idc/app/scripts'
+let g:netrw_dirhist_2='D:/idressin/idc/app/scripts/controllers'
+let g:netrw_dirhist_3='D:/idressin/idc/app/scripts'
+let g:netrw_dirhist_4='D:/idressin/idc/app'
+let g:netrw_dirhist_5='D:/idressin/api/idressin/idressin/assets'
+let g:netrw_dirhist_6='D:/idressin/api/idressin/idressin/assets/js'
