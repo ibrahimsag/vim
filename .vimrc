@@ -4,7 +4,22 @@
 "-----------------------------------------------------------------------------
 " Global Stuff
 "-----------------------------------------------------------------------------
+
 set nocompatible
+
+set shell=/bin/sh
+
+" Add the virtualenv's site-packages to vim path
+py << EOF
+import os.path
+import sys
+import vim
+if 'VIRTUAL_ENV' in os.environ:
+    project_base_dir = os.environ['VIRTUAL_ENV']
+    sys.path.insert(0, project_base_dir)
+    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+    execfile(activate_this, dict(__file__=activate_this))
+EOF
 
 " Get pathogen up and running
 filetype off 
@@ -18,7 +33,7 @@ set noswapfile
 
 " Enable persistent undo YEAH!
 set undofile
-set undodir=/tmp/vim/undo
+set undodir=~/tmp/vim/undo
 
 " to work with unicode
 if has("multi_byte")
@@ -37,9 +52,9 @@ filetype plugin on
 filetype indent on
 
 " Tabstops are 4 spaces
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
 set expandtab
 set autoindent
 
@@ -158,45 +173,45 @@ set clipboard+=unnamedplus
 set autoread
 set grepprg=grep\ -nH\ $*
 set number
-let mapleader = ","
+let mapleader = "-"
 
 " Wipe out all buffers
-nmap <silent> ,wa :1,9000bwipeout<cr>
+nnoremap <silent> <leader>wa :1,9000bwipeout<cr>
 
 " Toggle paste mode
-nmap <silent> ,p :set invpaste<CR>:set paste?<CR>
+nnoremap <silent> <leader>p :set invpaste<CR>:set paste?<CR>
 
 " cd to the directory containing the file in the buffer
-nmap <silent> ,cd :lcd %:h<CR>
-nmap <silent> ,md :!mkdir -p %:p:h<CR>
+nnoremap <silent> <leader>cd :lcd %:h<CR>
+nnoremap <silent> <leader>md :!mkdir -p %:p:h<CR>
 
 " Turn off that stupid highlight search
-nmap <silent> ,n :nohls<CR>
+nnoremap <silent> <leader>n :nohls<CR>
 
 " The following beast is something i didn't write... it will return the 
 " syntax highlighting group that the current "thing" under the cursor
 " belongs to -- very useful for figuring out what to change as far as 
 " syntax highlighting goes.
-nmap <silent> ,qq :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+nnoremap <silent> <leader>qq :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 " Make shift-insert work like in Xterm
-map <S-Insert> <MiddleMouse>
-map! <S-Insert> <MiddleMouse>
+noremap <S-Insert> <MiddleMouse>
+noremap! <S-Insert> <MiddleMouse>
 
 " set text wrapping toggles
-nmap <silent> ,ww :set invwrap<CR>:set wrap?<CR>
+nnoremap <silent> <leader>ww :set invwrap<CR>:set wrap?<CR>
 
 " Add a GUID to the current line
-imap <C-J>d <C-r>=substitute(system("uuidgen"), '.$', '', 'g')<CR>
+inoremap <C-J>d <C-r>=substitute(system("uuidgen"), '.$', '', 'g')<CR>
 
 " Search the current file for what's currently in the search register and display matches
-nmap <silent> ,gs :vimgrep /<C-r>// %<CR>:ccl<CR>:cwin<CR><C-W>J:nohls<CR>
+nnoremap <silent> <leader>gs :vimgrep /<C-r>// %<CR>:ccl<CR>:cwin<CR><C-W>J:nohls<CR>
 
 " Search the current file for the word under the cursor and display matches
-nmap <silent> ,gw :vimgrep /<C-r><C-w>/ %<CR>:ccl<CR>:cwin<CR><C-W>J:nohls<CR>
+nnoremap <silent> <leader>gw :vimgrep /<C-r><C-w>/ %<CR>:ccl<CR>:cwin<CR><C-W>J:nohls<CR>
 
 " Search the current file for the WORD under the cursor and display matches
-nmap <silent> ,gW :vimgrep /<C-r><C-a>/ %<CR>:ccl<CR>:cwin<CR><C-W>J:nohls<CR>
+nnoremap <silent> <leader>gW :vimgrep /<C-r><C-a>/ %<CR>:ccl<CR>:cwin<CR><C-W>J:nohls<CR>
 
 " Syntax coloring lines that are too long just slows down the world
 set synmaxcol=2048
@@ -213,8 +228,8 @@ if has("mac")
   let g:main_font = "Consolas:h9"
   let g:small_font = "Consolas:h9"
 else
-  let g:main_font="Consolas\ 10"
-  let g:small_font="Consolas\ 10"
+  let g:main_font="Inconsolata\ for\ Powerline\ 10"
+  let g:small_font="Inconsolata\ for\ Powerline\ 10"
 endif
 
 function! DiffCurrentFileAgainstAnother(snipoff, replacewith)
@@ -243,7 +258,7 @@ augroup END
 
 if has("gui_running")
   if has("gui_gtk2")
-    set guifont=Source\ Code\ Pro\ for\ Powerline\ 11
+    set guifont=Source\ Code\ Pro\ for\ Powerline\ 12
   elseif has("gui_photon")
     set guifont=Consolas:s11
   elseif has("gui_kde")
@@ -286,3 +301,60 @@ let g:ctrlp_custom_ignore = {
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cnoremap w!! %!sudo tee > /dev/null %
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+
+" window navigation
+noremap <c-j> <c-w>j
+noremap <c-k> <c-w>k
+noremap <c-l> <c-w>l
+noremap <c-h> <c-w>h
+
+" task list
+noremap <leader>td <Plug>TaskList
+
+" gundo
+noremap <leader>g :GundoToggle<CR>
+
+" ack
+nnoremap <leader>a <Esc>:Ack!
+
+"-------------------------
+" added for python
+" ------------------------
+au FileType python set foldmethod=indent
+au FileType python set foldlevel=99
+
+" pyflakes
+" let g:pyflakes_use_quickfix = 0
+
+" pep8
+let g:pep8_map='<leader>8'
+
+" tab completion
+au FileType python set omnifunc=pythoncomplete#Complete
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabNoCompleteAfter = ['^',',','\s']
+
+set completeopt=menuone,longest,preview
+
+" rope easy access
+noremap <leader>j :RopeGotoDefinition<CR>
+noremap <leader>r :RopeRename<CR>
+
+" For snipmate
+augroup django_snippets
+  autocmd!
+  autocmd FileType python set ft=python.django
+  autocmd FileType html set ft=htmldjango.html
+augroup END
+
+" experimental, mostly from LearnVimScriptTheHardway book
+cnoremap W w
+
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+augroup glhf
+  autocmd!
+  autocmd VimEnter * :echom ">^.^<"
+augroup END
