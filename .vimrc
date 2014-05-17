@@ -333,7 +333,6 @@ let g:pep8_map='<leader>8'
 " tab completion
 au FileType python set omnifunc=pythoncomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabNoCompleteAfter = ['^',',','\s']
 
 set completeopt=menuone,longest,preview
 
@@ -358,3 +357,5 @@ augroup glhf
   autocmd!
   autocmd VimEnter * :echom ">^.^<"
 augroup END
+
+let g:airline_powerline_fonts = 1
