@@ -22,7 +22,7 @@ if 'VIRTUAL_ENV' in os.environ:
 EOF
 
 " Get pathogen up and running
-filetype off 
+filetype off
 call pathogen#runtime_append_all_bundles()
 " I commented this one out so that it wouldn't cause duplicate tag problems
 " call pathogen#helptags()
@@ -74,7 +74,7 @@ set ch=2
 " Allow backspacing over indent, eol, and the start of an insert
 set backspace=2
 
-" Make sure that unsaved buffers that are to be put in the background are 
+" Make sure that unsaved buffers that are to be put in the background are
 " allowed to go in there (ie. the "must save first" error doesn't come up)
 set hidden
 
@@ -188,9 +188,9 @@ nnoremap <silent> <leader>md :!mkdir -p %:p:h<CR>
 " Turn off that stupid highlight search
 nnoremap <silent> <leader>n :nohls<CR>
 
-" The following beast is something i didn't write... it will return the 
+" The following beast is something i didn't write... it will return the
 " syntax highlighting group that the current "thing" under the cursor
-" belongs to -- very useful for figuring out what to change as far as 
+" belongs to -- very useful for figuring out what to change as far as
 " syntax highlighting goes.
 nnoremap <silent> <leader>qq :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
@@ -359,3 +359,5 @@ augroup glhf
 augroup END
 
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#whitespace#trailing_format = 'trl[%s]'
+let g:airline#extensions#whitespace#mixed_indent_format = 'ind[%s]'
