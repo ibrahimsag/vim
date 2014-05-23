@@ -91,7 +91,7 @@ set laststatus=2
 " Don't update the display while executing macros
 set lazyredraw
 
-" Don't show the current command int he lower right corner.  In OSX, if this is
+" Don't show the current command in the lower right corner.  In OSX, if this is
 " set and lazyredraw is set then it's slow as molasses, so we unset this
 set showcmd
 
@@ -228,8 +228,8 @@ if has("mac")
   let g:main_font = "Consolas:h9"
   let g:small_font = "Consolas:h9"
 else
-  let g:main_font="Inconsolata\ for\ Powerline\ 10"
-  let g:small_font="Inconsolata\ for\ Powerline\ 10"
+  let g:main_font="Source\ Code\ Pro\ for\ Powerline\ 12"
+  let g:small_font="Source\ Code\ Pro\ for\ Powerline\ 12"
 endif
 
 function! DiffCurrentFileAgainstAnother(snipoff, replacewith)
@@ -269,13 +269,11 @@ if has("gui_running")
     set guifont=Courier_New:h11:cDEFAULT
   endif
 endif
-" powerline shit
-let g:Powerline_symbols = 'fancy'
 
+set background=dark
+colorscheme solarized
 if has("gui_running")
   " exe "set guifont=" . g:main_font
-  set background=dark
-  colorscheme solarized
   if !exists("g:vimrcloaded")
       winpos 0 0
       if !&diff
@@ -301,6 +299,7 @@ let g:ctrlp_custom_ignore = {
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cnoremap w!! %!sudo tee > /dev/null %
+
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 
 " window navigation
