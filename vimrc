@@ -12,7 +12,7 @@ set shell=/bin/sh
 " Get pathogen up and running
 filetype off
 call pathogen#runtime_append_all_bundles()
-" I commented this one out so that it wouldn't cause duplicate tag problems
+" this would cause duplicate tag problems
 " call pathogen#helptags()
 
 " no swap YEAH!
