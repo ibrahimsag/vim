@@ -167,7 +167,7 @@ set hlsearch
 set incsearch
 
 " Add the unnamed register to the clipboard
-set clipboard+=unnamedplus
+set clipboard=unnamed
 
 " Automatically read a file that has changed on disk
 set autoread
@@ -212,6 +212,10 @@ nnoremap <silent> <leader>gw :vimgrep /<C-r><C-w>/ %<CR>:ccl<CR>:cwin<CR><C-W>J:
 
 " Search the current file for the WORD under the cursor and display matches
 nnoremap <silent> <leader>gW :vimgrep /<C-r><C-a>/ %<CR>:ccl<CR>:cwin<CR><C-W>J:nohls<CR>
+
+" sweet
+nnoremap ; :
+nnoremap : ;
 
 " Syntax coloring lines that are too long just slows down the world
 set synmaxcol=2048
@@ -357,6 +361,13 @@ augroup glhf
   autocmd VimEnter * :echom ">^.^<"
 augroup END
 
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 0
 let g:airline#extensions#whitespace#trailing_format = 'trl[%s]'
 let g:airline#extensions#whitespace#mixed_indent_format = 'ind[%s]'
+
+" drag visual settings
+vmap  <expr>  <LEFT>   DVB_Drag('left')
+vmap  <expr>  <RIGHT>  DVB_Drag('right')
+vmap  <expr>  <DOWN>   DVB_Drag('down')
+vmap  <expr>  <UP>     DVB_Drag('up')
+vmap  <expr>  D        DVB_Duplicate()
