@@ -139,8 +139,11 @@ set complete=.,w,b,t,i
 " When completing by tag, show the whole tag, not just the function name
 set showfulltag
 
-" Set the textwidth to be 80 chars
-set textwidth=80
+" Set the textwidth to be 100 chars
+set textwidth=100
+"
+" Show a colorcolumn at textwidth
+set colorcolumn=100
 
 " get rid of the silly characters in separators
 set fillchars = ""
