@@ -205,8 +205,8 @@ nnoremap <silent> <leader>gw :vimgrep /<C-r><C-w>/ %<CR>:ccl<CR>:cwin<CR><C-W>J:
 nnoremap <silent> <leader>gW :vimgrep /<C-r><C-a>/ %<CR>:ccl<CR>:cwin<CR><C-W>J:nohls<CR>
 
 " sweet
-nnoremap ; :
-nnoremap : ;
+noremap ; :
+noremap : ;
 
 " Syntax coloring lines that are too long just slows down the world
 set synmaxcol=2048
