@@ -124,3 +124,6 @@
 [submodule "bundle/syntastic"]
 	path = bundle/syntastic
 	url = https://github.com/scrooloose/syntastic
+[submodule "bundle/vim-sync"]
+	path = bundle/vim-sync
+	url = https://github.com/eshion/vim-sync.git
