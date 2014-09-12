@@ -127,3 +127,6 @@
 [submodule "bundle/vim-sync"]
 	path = bundle/vim-sync
 	url = https://github.com/eshion/vim-sync.git
+[submodule "bundle/vim-project"]
+	path = bundle/vim-project
+	url = https://github.com/amiorin/vim-project.git
