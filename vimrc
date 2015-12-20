@@ -5,15 +5,26 @@
 " Global Stuff
 "-----------------------------------------------------------------------------
 
+
+let g:python_host_prog = '/usr/local/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
+
+runtime autoload/pathogen.vim
+filetype off
+" Get pathogen up and running
+execute pathogen#infect()
+" this would cause duplicate tag problems
+" call pathogen#helptags()
+
+" Switch on syntax highlighting.
+syntax on
+
+" Set filetype stuff to on
+filetype plugin indent on
+
 set nocompatible
 
 set shell=/bin/sh
-
-" Get pathogen up and running
-filetype off
-call pathogen#runtime_append_all_bundles()
-" this would cause duplicate tag problems
-" call pathogen#helptags()
 
 " no swap YEAH!
 set nobackup
@@ -33,11 +44,6 @@ if has("multi_byte")
   "setglobal bomb
   set fileencodings=ucs-bom,utf-8,latin1
 endif
-
-" Set filetype stuff to on
-filetype on
-filetype plugin on
-filetype indent on
 
 " Tabstops are 4 spaces
 set tabstop=4
@@ -86,9 +92,6 @@ set showcmd
 " Show the current mode
 set showmode
 
-" Switch on syntax highlighting.
-syntax on
-
 " Hide the mouse pointer while typing
 set mousehide
 
@@ -109,7 +112,12 @@ set guioptions=acg
 "      "," key and the "d" key.  If the "d" key isn't pressed before the
 "      timeout expires, one of two things happens: The "," command is executed
 "      if there is one (which there isn't) or the command aborts.
-set timeoutlen=500
+set timeoutlen=1000
+
+" removes the delay when hitting esc in insert mode
+set noesckeys
+set ttimeout
+set ttimeoutlen=1
 
 " Keep some stuff in the history
 set history=100
@@ -123,9 +131,6 @@ set scrolloff=8
 
 " Allow the cursor to go in to "invalid" place
 " set virtualedit=all
-
-" Disable encryption (:X)
-set key=
 
 " Make the command-line completion better
 set wildmenu
@@ -284,10 +289,12 @@ endif
 "--------------------
 " ctrlp settings
 " -------------------
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.pyc  " Windows
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+
+" let g:ctrlp_user_command = 'find %s -type f | grep -v -'        " MacOSX/Linux
 
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.(git|hg|svn)|target|node_modules)$',
+  \ 'dir':  '\v[\/](\.(git|hg|svn)|target|node_modules|htmlcov|bower_components)$',
   \ 'file': '\v\.(exe|so|dll|class)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
@@ -296,12 +303,6 @@ let g:ctrlp_custom_ignore = {
 cnoremap w!! %!sudo tee > /dev/null %
 
 runtime bundle/vim-pathogen/autoload/pathogen.vim
-
-" window navigation
-noremap <c-j> <c-w>j
-noremap <c-k> <c-w>k
-noremap <c-l> <c-w>l
-noremap <c-h> <c-w>h
 
 " task list
 noremap <leader>td <Plug>TaskList
