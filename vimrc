@@ -5,6 +5,7 @@
 " Global Stuff
 "-----------------------------------------------------------------------------
 
+set clipboard+=unnamed
 
 let g:python_host_prog = '/usr/local/bin/python'
 let g:python3_host_prog = '/usr/local/bin/python3'
@@ -46,9 +47,9 @@ if has("multi_byte")
 endif
 
 " Tabstops are 4 spaces
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set expandtab
 set autoindent
 
@@ -77,13 +78,13 @@ set hidden
 set cpoptions=B$
 
 " Set the status line the way i like it
-set stl=%f\ %m\ %r\ Line:%l/%L[%p%%]\ Col:%v\ Buf:#%n\ [%b][0x%B]\ \ %<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+" set stl=%f\ %m\ %r\ Line:%l/%L[%p%%]\ Col:%v\ Buf:#%n\ [%b][0x%B]\ \ %<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
 " tell VIM to always put a status line in, even if there is only one window
 set laststatus=2
 
 " Don't update the display while executing macros
-set lazyredraw
+set nolazyredraw
 
 " Don't show the current command in the lower right corner.  In OSX, if this is
 " set and lazyredraw is set then it's slow as molasses, so we unset this
@@ -163,7 +164,7 @@ set hlsearch
 set incsearch
 
 " Add the unnamed register to the clipboard
-set clipboard=unnamed
+" set clipboard=unnamed
 
 " Automatically read a file that has changed on disk
 set autoread
@@ -286,19 +287,6 @@ if has("gui_running")
 endif
 :nohls
 
-"--------------------
-" ctrlp settings
-" -------------------
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-
-" let g:ctrlp_user_command = 'find %s -type f | grep -v -'        " MacOSX/Linux
-
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.(git|hg|svn)|target|node_modules|htmlcov|bower_components)$',
-  \ 'file': '\v\.(exe|so|dll|class)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
-
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cnoremap w!! %!sudo tee > /dev/null %
 
@@ -312,6 +300,12 @@ noremap <leader>g :GundoToggle<CR>
 
 " ack
 nnoremap <leader>a <Esc>:Ack!
+
+"-------------------------
+" coffee
+" ------------------------
+au FileType coffee set foldmethod=indent
+au FileType coffee set foldlevel=1
 
 "-------------------------
 " added for python
@@ -334,6 +328,18 @@ set completeopt=menuone,longest,preview
 " rope easy access
 noremap <leader>j :RopeGotoDefinition<CR>
 noremap <leader>r :RopeRename<CR>
+
+" For snipmate
+augroup django_snippets
+  autocmd!
+  autocmd FileType html set tabstop=2
+  autocmd FileType html set shiftwidth=2
+  autocmd FileType html set softtabstop=2
+  autocmd FileType javascript set tabstop=2
+  autocmd FileType javascript set shiftwidth=2
+  autocmd FileType javascript set softtabstop=2
+augroup END
+
 
 " For snipmate
 augroup django_snippets
@@ -363,3 +369,16 @@ vmap  <expr>  <RIGHT>  DVB_Drag('right')
 vmap  <expr>  <DOWN>   DVB_Drag('down')
 vmap  <expr>  <UP>     DVB_Drag('up')
 vmap  <expr>  D        DVB_Duplicate()
+
+noremap <c-j> <c-w>j
+noremap <c-k> <c-w>k
+noremap <c-l> <c-w>l
+noremap <c-h> <c-w>h
+
+nnoremap <silent><C-p> :CtrlSpace O<CR>
+
+set showtabline=0
+
+if executable("ag")
+    let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
+endif
