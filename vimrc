@@ -10,13 +10,6 @@ set clipboard+=unnamed
 let g:python_host_prog = '/usr/local/bin/python'
 let g:python3_host_prog = '/usr/local/bin/python3'
 
-runtime autoload/pathogen.vim
-filetype off
-" Get pathogen up and running
-execute pathogen#infect()
-" this would cause duplicate tag problems
-" call pathogen#helptags()
-
 " Switch on syntax highlighting.
 syntax on
 
