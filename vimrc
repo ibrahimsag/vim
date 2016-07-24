@@ -312,34 +312,11 @@ au FileType python set foldlevel=99
 " pep8
 let g:pep8_map='<leader>8'
 
-" tab completion
-au FileType python set omnifunc=pythoncomplete#Complete
-let g:SuperTabDefaultCompletionType = "context"
-
 set completeopt=menuone,longest,preview
 
 " rope easy access
 noremap <leader>j :RopeGotoDefinition<CR>
 noremap <leader>r :RopeRename<CR>
-
-" For snipmate
-augroup django_snippets
-  autocmd!
-  autocmd FileType html set tabstop=2
-  autocmd FileType html set shiftwidth=2
-  autocmd FileType html set softtabstop=2
-  autocmd FileType javascript set tabstop=2
-  autocmd FileType javascript set shiftwidth=2
-  autocmd FileType javascript set softtabstop=2
-augroup END
-
-
-" For snipmate
-augroup django_snippets
-  autocmd!
-  autocmd FileType python set ft=python.django
-  autocmd FileType html set ft=htmldjango.html
-augroup END
 
 " experimental, mostly from LearnVimScriptTheHardway book
 cnoremap W w
@@ -356,22 +333,9 @@ let g:airline_powerline_fonts = 0
 let g:airline#extensions#whitespace#trailing_format = 'trl[%s]'
 let g:airline#extensions#whitespace#mixed_indent_format = 'ind[%s]'
 
-" drag visual settings
-vmap  <expr>  <LEFT>   DVB_Drag('left')
-vmap  <expr>  <RIGHT>  DVB_Drag('right')
-vmap  <expr>  <DOWN>   DVB_Drag('down')
-vmap  <expr>  <UP>     DVB_Drag('up')
-vmap  <expr>  D        DVB_Duplicate()
-
 noremap <c-j> <c-w>j
 noremap <c-k> <c-w>k
 noremap <c-l> <c-w>l
 noremap <c-h> <c-w>h
 
-nnoremap <silent><C-p> :CtrlSpace O<CR>
-
 set showtabline=0
-
-if executable("ag")
-    let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
-endif
