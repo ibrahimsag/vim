@@ -1,20 +1,13 @@
-"
-" Mostly Derek Wyatt's Vim Configuration
-"
+source setup/dein.vim
+
 "-----------------------------------------------------------------------------
 " Global Stuff
 "-----------------------------------------------------------------------------
 
 set clipboard+=unnamed
 
-let g:python_host_prog = '/usr/local/bin/python'
-let g:python3_host_prog = '/usr/local/bin/python3'
-
 " Switch on syntax highlighting.
 syntax on
-
-" Set filetype stuff to on
-filetype plugin indent on
 
 set nocompatible
 
@@ -250,43 +243,12 @@ augroup END
 " Set up the window colors and size
 "-----------------------------------------------------------------------------
 
-if has("gui_running")
-  if has("gui_gtk2")
-    set guifont=Source\ Code\ Pro\ for\ Powerline\ 12
-  elseif has("gui_photon")
-    set guifont=Consolas:s11
-  elseif has("gui_kde")
-    set guifont=Consolas/11/-1/5/50/0/0/0/1/0
-  elseif has("x11")
-    set guifont=-*-courier-medium-r-normal-*-*-180-*-*-m-*-*
-  else
-    set guifont=Courier_New:h11:cDEFAULT
-  endif
-endif
-
 set background=dark
 colorscheme solarized
-if has("gui_running")
-  " exe "set guifont=" . g:main_font
-  if !exists("g:vimrcloaded")
-      winpos 0 0
-      if !&diff
-          winsize 130 120
-      else
-          winsize 227 120
-      endif
-      let g:vimrcloaded = 1
-  endif
-endif
-:nohls
+nohls
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cnoremap w!! %!sudo tee > /dev/null %
-
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-
-" task list
-noremap <leader>td <Plug>TaskList
 
 " gundo
 noremap <leader>g :GundoToggle<CR>
