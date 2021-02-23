@@ -1,4 +1,4 @@
-source setup/dein.vim
+source ~/.vim/setup/dein.vim
 
 "-----------------------------------------------------------------------------
 " Global Stuff
@@ -20,18 +20,7 @@ set noswapfile
 " Enable persistent undo YEAH!
 set undofile
 set undodir=~/tmp/vim/undo
-
-" to work with unicode
-if has("multi_byte")
-  if &termencoding == ""
-    let &termencoding = &encoding
-  endif
-  set encoding=utf-8
-  setglobal fileencoding=utf-8
-  "setglobal bomb
-  set fileencodings=ucs-bom,utf-8,latin1
-endif
-
+"
 " Tabstops are 4 spaces
 set tabstop=2
 set shiftwidth=2
@@ -79,6 +68,9 @@ set showcmd
 " Show the current mode
 set showmode
 
+" use mouse scroll
+set mouse=a
+
 " Hide the mouse pointer while typing
 set mousehide
 
@@ -102,7 +94,7 @@ set guioptions=acg
 set timeoutlen=1000
 
 " removes the delay when hitting esc in insert mode
-set noesckeys
+" set noesckeys
 set ttimeout
 set ttimeoutlen=1
 
@@ -114,7 +106,7 @@ set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo
 
 " When the page starts to scroll, keep the cursor 8 lines from the top and 8
 " lines from the bottom
-set scrolloff=8
+set scrolloff=2
 
 " Allow the cursor to go in to "invalid" place
 " set virtualedit=all
@@ -123,7 +115,7 @@ set scrolloff=8
 set wildmenu
 
 " Make it easier to complete buffers, open files, etc...
-set ignorecase
+" set ignorecase
 
 " Same as default except that I remove the 'u' option
 set complete=.,w,b,t,i
@@ -132,10 +124,10 @@ set complete=.,w,b,t,i
 set showfulltag
 
 " Set the textwidth to be 100 chars
-set textwidth=100
-"
+set textwidth=0
+
 " Show a colorcolumn at textwidth
-set colorcolumn=100
+" set colorcolumn=120
 
 " get rid of the silly characters in separators
 set fillchars = ""
@@ -156,7 +148,7 @@ set incsearch
 set autoread
 set grepprg=grep\ -nH\ $*
 set number
-let mapleader = "-"
+let mapleader = "\\"
 
 " Wipe out all buffers
 nnoremap <silent> <leader>wa :1,9000bwipeout<cr>
@@ -165,11 +157,14 @@ nnoremap <silent> <leader>wa :1,9000bwipeout<cr>
 nnoremap <silent> <leader>p :set invpaste<CR>:set paste?<CR>
 
 " cd to the directory containing the file in the buffer
-nnoremap <silent> <leader>cd :lcd %:h<CR>
+" nnoremap <silent> <leader>cd :lcd %:h<CR>
 nnoremap <silent> <leader>md :!mkdir -p %:p:h<CR>
 
 " Turn off that stupid highlight search
 nnoremap <silent> <leader>n :nohls<CR>
+
+" redraw the screen in case i hit clear on the editor terminal or it gets messy as i scroll
+nnoremap <silent> <leader>r :redraw!<CR>
 
 " The following beast is something i didn't write... it will return the
 " syntax highlighting group that the current "thing" under the cursor
@@ -243,8 +238,9 @@ augroup END
 " Set up the window colors and size
 "-----------------------------------------------------------------------------
 
+" let g:airline_theme='one'
+colorscheme one
 set background=dark
-colorscheme solarized
 nohls
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
@@ -256,48 +252,34 @@ noremap <leader>g :GundoToggle<CR>
 " ack
 nnoremap <leader>a <Esc>:Ack!
 
-"-------------------------
-" coffee
-" ------------------------
-au FileType coffee set foldmethod=indent
-au FileType coffee set foldlevel=1
-
-"-------------------------
-" added for python
-" ------------------------
-au FileType python set foldmethod=indent
-au FileType python set foldlevel=99
-
-" pyflakes
-" let g:pyflakes_use_quickfix = 0
-
-" pep8
-let g:pep8_map='<leader>8'
-
 set completeopt=menuone,longest,preview
 
-" rope easy access
-noremap <leader>j :RopeGotoDefinition<CR>
-noremap <leader>r :RopeRename<CR>
-
-" experimental, mostly from LearnVimScriptTheHardway book
-cnoremap W w
+cnoremap :W :w
 
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
-
-augroup glhf
-  autocmd!
-  autocmd VimEnter * :echom ">^.^<"
-augroup END
 
 let g:airline_powerline_fonts = 0
 let g:airline#extensions#whitespace#trailing_format = 'trl[%s]'
 let g:airline#extensions#whitespace#mixed_indent_format = 'ind[%s]'
 
-noremap <c-j> <c-w>j
-noremap <c-k> <c-w>k
-noremap <c-l> <c-w>l
-noremap <c-h> <c-w>h
-
 set showtabline=0
+
+let g:haskell_tabular = 1
+
+vmap a= :Tabularize /=<CR>
+vmap a; :Tabularize /::<CR>
+vmap a- :Tabularize /-><CR>
+
+let g:netrw_banner=0   " disable banner
+" let g:netrw_liststyle=3 " tree view
+let g:netrw_list_hide=netrw_gitignore#Hide()
+let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+
+set foldmethod=indent
+
+let g:airline#extensions#ale#enabled = 1
+
+set path+=**
+
+nnoremap <Leader>c :set cursorcolumn!<cr>

@@ -5,48 +5,48 @@ if &compatible
 endif
 
 " Required:
-set runtimepath^=dein/repos/github.com/Shougo/dein.vim
+set runtimepath^=~/.vim/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-call dein#begin(expand('dein'))
+call dein#begin(expand('~/.vim/dein'))
 
 " Let dein manage dein
 " Required:
 call dein#add('Shougo/dein.vim')
 
+" Commands
+call dein#add('haya14busa/dein-command.vim')
 
-call dein#add('Shougo/vimproc.nvim')
-call dein#add('Shougo/unite.nvim')
-call dein#add('Shougo/vimshell.nvim')
-call dein#add('Shougo/deoplete.nvim')
+call dein#add('tpope/vim-vinegar')
+
 " Add or remove your plugins here:
 
+call dein#add('tomtom/tlib_vim.git')
+call dein#add('MarcWeber/vim-addon-mw-utils')
+
+call dein#add('rakr/vim-one')
 call dein#add('altercation/vim-colors-solarized')
-call dein#add('neovimhaskell/haskell-vim')
+
+" call dein#add('lifepillar/vim-solarized8')
 call dein#add('bling/vim-airline')
-call dein#add('bling/vim-bufferline')
-call dein#add('dag/vim-fish')
+" call dein#add('dag/vim-fish')
 call dein#add('godlygeek/tabular')
-call dein#add('justmao945/vim-clang')
-call dein#add('kchmck/vim-coffee-script')
+" call dein#add('justmao945/vim-clang')
 call dein#add('mattn/emmet-vim')
 call dein#add('mileszs/ack.vim')
-call dein#add('pangloss/vim-javascript')
-call dein#add('pearofducks/ansible-vim')
-call dein#add('scrooloose/syntastic')
+" call dein#add('pangloss/vim-javascript')
 call dein#add('sjl/gundo.vim')
-call dein#add('sontek/minibufexpl.vim')
 call dein#add('tpope/vim-abolish')
 call dein#add('tpope/vim-commentary')
 call dein#add('tpope/vim-endwise')
-call dein#add('tpope/vim-f')
+call dein#add('tpope/vim-fugitive')
 call dein#add('tpope/vim-git')
 call dein#add('tpope/vim-markdown')
 call dein#add('tpope/vim-repeat')
 call dein#add('tpope/vim-surround')
 call dein#add('tpope/vim-unimpaired')
-call dein#add('neovimhaskell/haskell-vim')
 
+call dein#add('machakann/vim-highlightedyank')
 
 " Required:
 call dein#end()
