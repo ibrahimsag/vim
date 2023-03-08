@@ -14,6 +14,7 @@ vim.keymap.set("n", "<leader>n", function()
   vim.o.textwidth = 70
   vim.o.cc = "+2"
   vim.o.number = false
+  vim.o.smartindent = false
 end)
 
 local hsluv = require('hsluv')
